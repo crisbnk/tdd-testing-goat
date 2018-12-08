@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import unittest
 
+
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -22,7 +23,8 @@ class NewVisitorTest(unittest.TestCase):
 
         # He is invited to enter a to-do item straight away
         inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(inputbox.get_attribute('placeholder'),'Enter a to-do item')
+        self.assertEqual(inputbox.get_attribute(
+            'placeholder'), 'Enter a to-do item')
 
         # He types "Buy three red apples" into a text box
         inputbox.send_keys('Buy three red apples')
@@ -34,7 +36,8 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = self.browser.find_elements_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: Buy three red apples' for row in rows), "New to-do item did not appear in table")
+        self.assertIn('1: Buy three red apples', [row.text for row in rows])
+        self.assertIn('2: Make an apple pie', [row.text for row in rows])
 
         # There is still a text box inviting him to add another item.
         # He enters "Use an apple to make an apple-pie"
@@ -50,5 +53,6 @@ class NewVisitorTest(unittest.TestCase):
 
         # Satisfied, he goes back to his dinner
 
+
 if __name__ == '__main__':
-    unittest.main(warnings = 'ignore')
+    unittest.main(warnings='ignore')
