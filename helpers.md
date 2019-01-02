@@ -12,11 +12,11 @@
 
 # Run Functional Tests
 
-`python functional_tests.py`
+`python manage.py test functional_tests`
 
 # Run Unit Tests
 
-`python manage.py test`
+`python manage.py test lists`
 
 # Unit-Test/Code Cycle
 
